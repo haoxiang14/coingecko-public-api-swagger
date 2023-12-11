@@ -24,7 +24,6 @@ paths:
       summary: Check API server status
       description: |
         Check API server status
-        <br> Test
       operationId: ping
       security:
         - apiKeyAuth: []
