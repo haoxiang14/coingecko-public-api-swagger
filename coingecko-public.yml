@@ -44,8 +44,7 @@ paths:
           description: >-
             coins' ids, comma-separated if querying more than 1 coin. 
             <br>*refers to [`/coins/list`](/reference/coins_list).
-            <br>Example: `bitcoin ` or ` bitcoin,ethereum,...`
-            <br> Test 
+            <br>Example: `bitcoin ` or ` bitcoin,ethereum,...` 
           required: true
           schema:
             type: string
