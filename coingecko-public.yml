@@ -22,8 +22,6 @@ paths:
       tags:
         - ping
       summary: Check API server status
-      description: |
-        Check API server status
       operationId: ping
       security:
         - apiKeyAuth: []
@@ -977,7 +975,7 @@ paths:
       tags:
         - derivatives
       summary: >-
-        Derivatives Exchange Data List
+        Derivatives Exchanges List with Data
       operationId: derivatives_exchanges
       security:
         - apiKeyAuth: []
