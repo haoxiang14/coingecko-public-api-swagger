@@ -1,0 +1,1252 @@
+openapi: '3.0.0'
+info:
+  description: ''
+  version: 3.1.0
+  title: CoinGecko Public API V3
+servers:
+  - url: https://api.coingecko.com/api/v3
+
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+
+security:
+  - apiKeyAuth: []
+
+paths:
+  /ping:
+    get:
+      tags:
+        - ping
+      summary: Check API server status
+      description: |
+        Check API server status
+      operationId: ping
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: Status OK
+  /simple/price:
+    get:
+      tags:
+        - simple
+      summary: Coin Price by ID
+      operationId: simple_price
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: ids
+          in: query
+          description: >-
+            coins' ids, comma-separated if querying more than 1 coin. 
+            <br>*refers to [`/coins/list`](/reference/coins_list).
+            <br>Example: `bitcoin ` or ` bitcoin,ethereum,...`
+          required: true
+          schema:
+            type: string
+        - name: vs_currencies
+          in: query
+          description: >-
+            target currency of coins, comma-separated if querying more than 1 currency. 
+            <br>*refers to [`simple/supported_vs_currencies`](/reference/simple_supported_vs_currencies).
+            <br>Example: `usd ` or ` usd,eur,...`
+          required: true
+          schema:
+            type: string
+        - name: include_market_cap
+          in: query
+          description: >-
+            include market cap, default: false 
+          required: false
+          schema:
+            type: boolean
+        - name: include_24hr_vol
+          in: query
+          description: >-
+            include 24hr volume, default: false
+          required: false
+          schema:
+            type: boolean
+        - name: include_24hr_change
+          in: query
+          description: >-
+            include 24hr change, default: false
+          schema:
+            type: boolean
+        - name: include_last_updated_at
+          in: query
+          description: >-
+            include last updated price time in UNIX, default: false
+          required: false
+          schema:
+            type: boolean
+        - name: precision
+          in: query
+          description: >-
+            decimal place for currency price value 
+          required: false
+          schema:
+            type: string
+            enum: [full, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+      responses:
+        '200':
+          description: price(s) of cryptocurrency
+  /simple/token_price/{id}:
+    get:
+      tags:
+        - simple
+      summary: Coin Price by Contract Address
+      operationId: simple_token_price
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            asset platform's id 
+            <br>*refers to [`/asset_platforms`](/reference/asset_platforms_list).
+            <br>Example: `ethereum`
+          required: true
+          schema:
+            type: string
+        - name: contract_addresses
+          in: query
+          description: >-
+            the contract address of tokens, comma-separated if querying more than 1 token's contract address 
+            <br> Example: `0x23a.... ` or ` 0x23a...,0xad7..., ...`
+          required: true
+          schema:
+            type: string
+        - name: vs_currencies
+          in: query
+          description: >-
+            target currency of coins, comma-separated if querying more than 1 currency. 
+            <br> *refers to [`simple/supported_vs_currencies`](/reference/simple_supported_vs_currencies).
+            <br> Example: `usd ` or ` usd,eur,...`
+          required: true
+          schema:
+            type: string
+        - name: include_market_cap
+          in: query
+          description: >-
+            include market capitalization, default: false
+          required: false
+          schema:
+            type: boolean
+        - name: include_24hr_vol
+          in: query
+          description: >-
+            include 24hr volume, default: false
+          required: false
+          schema:
+            type: boolean
+        - name: include_24hr_change
+          in: query
+          description: >-
+            include 24hr change 
+            default: false
+          required: false
+          schema:
+            type: boolean
+        - name: include_last_updated_at
+          in: query
+          description: >-
+            include last updated price time in UNIX , default: false
+          required: false
+          schema:
+            type: boolean
+        - name: precision
+          in: query
+          description: >-
+            decimal place for currency price value 
+          required: false
+          schema:
+            type: string
+            enum: [full, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+      responses:
+        '200':
+          description: price(s) of cryptocurrency
+  /simple/supported_vs_currencies:
+    get:
+      tags:
+        - simple
+      summary: Supported Currencies List
+      operationId: simple_supported_vs_currencies
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: list of supported currencies
+  /coins/list:
+    get:
+      tags:
+        - coins
+      summary: Coins List
+      operationId: coins_list
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: include_platform
+          in: query
+          description: >-
+            include platform and token's contract addresses, default: false
+          required: false
+          schema:
+            type: boolean
+
+      responses:
+        '200':
+          description: List all coins with id, name, and symbol
+  /coins/markets:
+    get:
+      tags:
+        - coins
+      summary: Coins List with Market Data
+      operationId: coins_markets
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: vs_currency
+          in: query
+          description: >-
+            target currency of coins and market data
+            <br> *refers to [`/simple/supported_vs_currencies`](/reference/simple_supported_vs_currencies).
+            <br> Example: `usd ` or ` usd,eur,...`
+          required: true
+          schema:
+            type: string
+        - name: ids
+          in: query
+          description: >-
+            coins' ids, comma-separated if querying more than 1 coin. 
+            <br> *refers to [`/coins/list`](/reference/coins_list).
+            <br> Example: `bitcoin ` or ` bitcoin,ethereum,...`
+          required: false
+          schema:
+            type: string
+        - name: category
+          in: query
+          description: >-
+            filter based on coins' category
+            <br> *refers to [`/coins/categories/list`](/reference/coins_categories_list).
+            <br> Example: `layer-1 ` or ` layer-2`
+          required: false
+          schema:
+            type: string
+        - name: order
+          in: query
+          description: >-
+            sort result by field, default: market_cap_desc
+          required: false
+          schema:
+            type: string
+            enum: [market_cap_asc, market_cap_desc, volume_asc, volume_desc, id_asc, id_desc]
+        - name: per_page
+          in: query
+          description: >-
+            total results per page, default: 100
+            <br> Valid values: 1...250
+          required: false
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: >-
+            page through results, default: 1
+          required: false
+          schema:
+            type: integer
+        - name: sparkline
+          in: query
+          description: >-
+            include sparkline 7 days data, default: false
+          required: false
+          schema:
+            type: boolean
+        - name: price_change_percentage
+          in: query
+          description: >-
+            include price change percentage timeframe, comma-separated if query more than 1 price change percentage timeframe
+            <br> Valid values: 1h, 24h, 7d, 14d, 30d, 200d, 1y
+            <br> Example: `1h ` or ` 1h,24h,7d`
+          required: false
+          schema:
+            type: string
+        - name: locale
+          in: query
+          description: >-
+            language background, default: en
+          required: false
+          schema:
+            type: string
+            enum: [ar, bg, cs, da, de, el, en, es, fi, fr, he, hi, hr, hu, id, it, ja, ko, lt, nl, no, pl, pt, ro, ru, sk, sl, sv, th, tr, uk, vi, zh, zh-tw]
+        - name: precision
+          in: query
+          description: >-
+            decimal place for currency price value
+          required: false
+          schema:
+            type: string
+            enum: [full, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+      responses:
+        '200':
+          description: List all coins with market data
+  /coins/{id}:
+    get:
+      tags:
+        - coins
+      summary: >-
+        Coin Data by ID
+      operationId: coins_id
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            coin id
+            <br> *refers to [`/coins/list`](/reference/coins_list).
+            <br> Example: `bitcoin`
+          required: true
+          schema:
+            type: string
+        - name: localization
+          in: query
+          description: >-
+            include all the localized languages in the response, default: true
+          required: false
+          schema:
+            type: boolean
+        - name: tickers
+          in: query
+          description: >-
+            include tickers data, default: true
+          required: false
+          schema:
+            type: boolean
+        - name: market_data
+          in: query
+          description: >-
+            include market data, default: true
+          required: false
+          schema:
+            type: boolean
+        - name: community_data
+          in: query
+          description: >-
+            include community data, default: true
+          required: false
+          schema:
+            type: boolean
+        - name: developer_data
+          in: query
+          description: >-
+            include developer data, default: true
+          required: false
+          schema:
+            type: boolean
+        - name: sparkline
+          in: query
+          description: >-
+            include sparkline 7 days data, default: false
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Get current data for a coin
+  /coins/{id}/tickers:
+    get:
+      tags:
+        - coins
+      summary: >-
+        Coin Tickers by ID
+      operationId: coins_id_tickers
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            coin id
+            <br> *refers to [`/coins/list`](/reference/coins_list).
+            <br> Example: `bitcoin`
+          required: true
+          schema:
+            type: string
+        - name: exchange_ids
+          in: query
+          description: >-
+            exchange id
+            <br> *refers to [`/exchanges/list`](/reference/exchanges_list).
+            <br> Example: `binance`
+          required: false
+          schema:
+            type: string
+        - name: include_exchange_logo
+          in: query
+          description: >-
+            include exchange logo, default: false
+          required: false
+          schema:
+            type: boolean
+        - name: page
+          in: query
+          description: >-
+            page through results
+          required: false
+          schema:
+            type: integer
+        - name: order
+          in: query
+          description: >-
+            use this to sort the order of responses, default: trust_score_desc
+          required: false
+          schema:
+            type: string
+            enum: [trust_score_desc, trust_score_asc, volume_desc, volume_asc]
+        - name: depth
+          in: query
+          description: >-
+            include 2% orderbook depth, default: false
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Get coin tickers
+  /coins/{id}/history:
+    get:
+      tags:
+        - coins
+      summary: >-
+        Coin Historical Data by ID
+      operationId: coins_id_history
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            coin id
+            <br> *refers to [`/coins/list`](/reference/coins_list).
+            <br> Example: `bitcoin`
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: query
+          description: >-
+            the date of data snapshot
+            <br> Format: `dd-mm-yyyy`
+            <br> Example: `30-12-2017`
+          required: true
+          schema:
+            type: string
+        - name: localization
+          in: query
+          description: >-
+            include all the localized languages in response, default: true
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Get historical data (name, price, market, stats) at a given date for a coin
+  /coins/{id}/market_chart:
+    get: 
+      tags:
+        - coins
+      summary: >-
+        Coin Historical Chart Data by ID
+      operationId: coins_market_chart
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            coin id
+            <br> *refers to [`/coins/list`](/reference/coins_list).
+            <br> Example: `bitcoin`
+          required: true
+          schema:
+            type: string
+        - name: vs_currency
+          in: query
+          description: >-
+            target currency of market data
+            <br> *refers to [`/simple/supported_vs_currencies`](/reference/simple_supported_vs_currencies).
+            <br> Example: `usd ` or ` usd,eur,...`
+          required: true
+          schema:
+            type: string
+        - name: days
+          in: query
+          description: >-
+            data up to number of days ago
+            <br> Example: `1 ` or ` 14 ` or ` 30` or `max`
+          required: true
+          schema:
+            type: string
+        - name: interval
+          in: query
+          description: >-
+            data interval. Possible value: daily
+          required: true
+          schema:
+            type: string
+            enum: [daily]
+        - name: precision
+          in: query
+          description: >-
+            decimal place for currency price value
+          required: false
+          schema:
+            type: string
+            enum: [full, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+      responses:
+        '200':
+          description: Get historical market data include price, market cap, and 24h volume (granularity auto)
+  /coins/{id}/market_chart/range:
+    get:
+      tags:
+        - coins
+      summary: >-
+        Coin Historical Chart within Time Range by ID
+      operationId: coins_id_market_chart
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            coin id
+            <br> *refers to [`/coins/list`](/reference/coins_list).
+            <br> Example: `bitcoin`
+          required: true
+          schema:
+            type: string
+        - name: vs_currency
+          in: query
+          description: >-
+            target currency of market data
+            <br> *refers to [`/simple/supported_vs_currencies`](/reference/simple_supported_vs_currencies).
+            <br> Example: `usd ` or ` usd,eur,...`
+          required: true
+          schema:
+            type: string
+        - name: from
+          in: query
+          description: >-
+            starting date in UNIX timestamp 
+            <br> Example: `1392577232`
+          required: true
+          schema:
+            type: integer
+        - name: to
+          in: query
+          description: >-
+            ending date in UNIX timestamp
+            <br> Example: `1422577232`
+          required: true
+          schema:
+            type: integer
+        - name: precision
+          in: query
+          description: >-
+            decimal place for currency price value
+          required: false
+          schema:
+            type: string
+            enum: [full, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]   
+      responses:
+        '200':
+          description: Get historical market data include price, market cap, and 24h volume (granularity auto)
+  /coins/{id}/ohlc:
+    get:
+      tags:
+        - coins
+      summary: >-
+        Coin OHLC Chart by ID
+      operationId: coins_id_ohlc
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            coin id
+            <br> *refers to [`/coins/list`](/reference/coins_list).
+            <br> Example: `bitcoin`
+          required: true
+          schema:
+            type: string
+        - name: vs_currency
+          in: query
+          description: >-
+            target currency of price data
+            <br> *refers to [`/simple/supported_vs_currencies`](/reference/simple_supported_vs_currencies).
+            <br> Example: `usd ` or ` usd,eur,...`
+          required: true
+          schema:
+            type: string
+        - name: days
+          in: query
+          description: >-
+            data up to number of days ago 
+          required: true
+          schema:
+            type: string
+            enum: [1, 7, 14, 30, 90, 180, 365, max]
+        - name: precision
+          in: query
+          description: >-
+            decimal place for currency price value
+          required: false
+          schema:
+            type: string
+            enum: [full, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+      responses:
+        '200':
+          description: Get coin's OHLC
+  /coins/{id}/contract/{contract_address}:
+    get:
+      tags:
+        - contract
+      summary: Coin Data by Contract Address
+      operationId: coins_contract_address
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description : >-
+            asset platform id
+            <br> *refers to [`/asset_platforms`](/reference/asset_platforms_list)
+            <br> Example: `ethereum`
+          required: true
+          schema:
+            type: string
+        - name: contract_address
+          in: path
+          description: >-
+            the contract address of token
+            <br> Example: `0x23a...`
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get current data for a coin
+  /coins/{id}/contract/{contract_address}/market_chart/:
+    get:
+      tags:
+        - contract
+      summary: Coin Historical Chart Data by Contract Address
+      operationId: contract_address_market_chart
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            asset platform id
+            <br> *refers to [`/asset_platforms`](/reference/asset_platforms_list)
+            <br> Example: `ethereum`
+          required: true
+          schema:
+            type: string
+        - name: contract_address
+          in: path
+          description: >-
+            the contract address of token
+            <br> Example: `0x23a...`
+          required: true
+          schema:
+            type: string
+        - name: vs_currency
+          in: query
+          description: >-
+            target currency of market data
+            <br> *refers to [`/simple/supported_vs_currencies`]().
+            <br> Example: `usd ` or ` usd,eur,...`
+          required: true
+          schema:
+            type: string
+        - name: days
+          in: query
+          description: >-
+            data up to number of days ago
+            <br> Example: `1/14/30/max`
+          required: true
+          schema:
+            type: string
+        - name: precision
+          in: query
+          description: >-
+            decimal place for currency price value
+          required: false
+          schema:
+            type: string
+            enum: [full, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+      responses:
+        '200':
+          description: Get historical market data include price, market cap, and 24h volume
+  /coins/{id}/contract/{contract_address}/market_chart/range:
+    get:
+      tags:
+        - contract
+      summary: Coin Historical Chart Data within Time Range by Contract Address
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            asset platform id
+            <br> *refers to [`/asset_platforms`](/reference/asset_platforms_list)
+            <br> Example: `ethereum`
+          required: true
+          schema:
+            type: string
+        - name: contract_address
+          in: path
+          description: >-
+            the contract address of token
+            <br> Example: `0x23a...`
+          required: true
+          schema:
+            type: string
+        - name: vs_currency
+          in: query
+          description: >-
+            target currency of market data
+            <br> *refers to [`/simple/supported_vs_currencies`](/reference/simple_supported_vs_currencies).
+            <br> Example: `usd ` or ` usd,eur,...`
+          required: true
+          schema:
+            type: string
+        - name: from
+          in: query
+          description: >-
+            starting date in UNIX timestamp
+            <br> Example: `1392577232`
+          required: true
+          schema:
+            type: integer
+        - name: to
+          in: query
+          description: >-
+            ending date in UNIX timestamp
+            <br> Example: `1422577232`
+          required: true
+          schema:
+            type: integer
+        - name: precision
+          in: query
+          description: >-
+            decimal place for currency price value
+          required: false
+          schema:
+            type: string
+            enum: [full, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+      responses:
+        '200':
+          description: Get historical market data include price, market cap, and 24h volume
+  /asset_platforms:
+    get:
+      tags:
+        - asset_platforms
+      summary: >-
+        Asset Platforms List
+      operationId: asset_platforms_list
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: filter
+          in: query
+          description: >-
+            apply relevant filters to results
+            <br> Valid values: `nft`
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List all asset platforms
+  /coins/categories/list:
+    get:
+      tags:
+        - categories
+      summary: >-
+        Coins Categories List
+      operationId: coins_categories_list
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: List all categories
+  /coins/categories:
+    get:
+      tags:
+        - categories
+      summary: >-
+        Coins Categories List with Market Data
+      operationId: coins_categories
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: order
+          in: query
+          description: >-
+            sort results by field, default: market_cap_desc
+          required: false
+          schema:
+            type: string
+            enum: [market_cap_desc, market_cap_asc, name_desc, name_asc, market_cap_change_24h_desc and market_cap_change_24h_asc]
+      responses:
+        '200':
+          description: List all categories with market data
+  /exchanges:
+    get:
+      tags:
+        - exchanges
+      summary: >-
+        Exchanges List with data
+      operationId: exchanges
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: per_page
+          in: query
+          description: >-
+            total results per page, default: 100
+            <br> Valid values: 1...250
+          required: false
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: >-
+            page through results, default: 1
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List all exchanges
+  /exchanges/list:
+    get:
+      tags:
+        - exchanges
+      summary: >-
+        Exchanges List
+      operationId: exchanges_list
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: List all exchanges with id and name
+  /exchanges/{id}:
+    get:
+      tags:
+        - exchanges
+      summary: >-
+        Exchange Data by ID
+      operationId: exchanges_id
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            exchange id
+            <br> *refers to [`/exchanges/list`](/reference/exchanges_list).
+            <br> Example: `binance`
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get exchange volume in BTC and top 100 tickers only
+  /exchanges/{id}/tickers:
+    get:
+      tags:
+        - exchanges
+      summary: >-
+        Exchange Tickers by ID
+      operationId: exchanges_id_tickers
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            exchange id
+            <br> *refers to [`/exchanges/list`](/reference/exchanges_list).
+            <br> Example: `binance`
+          required: true
+          schema:
+            type: string
+        - name: coin_ids
+          in: query
+          description: >-
+            filter tickers by coin_ids
+            <br> *refers to [`/coins/list`](/reference/coins_list).
+            <br> Example: `bitcoin ` or ` bitcoin,ethereum,...`
+          required: false
+          schema:
+            type: string
+        - name: include_exchange_logo
+          in: query
+          description: >-
+            include exchange logo, default: false
+          required: false
+          schema:
+            type: boolean
+        - name: page
+          in: query
+          description: >-
+            page through results
+          required: false
+          schema:
+            type: integer
+        - name: depth
+          in: query
+          description: >-
+            include 2% orderbook depth (Example: cost_to_move_up_usd & cost_to_move_down_usd),default: false
+          required: false
+          schema:
+            type: boolean
+        - name: order
+          in: query
+          description: >-
+            use this to sort the order of responses, default: trust_score_desc
+          required: false
+          schema:
+            type: string
+            enum: [trust_score_desc, trust_score_asc, volume_desc, volume_asc]
+      responses:
+        '200':
+          description: Get exchange tickers
+  /exchanges/{id}/volume_chart:
+    get:
+      tags:
+        - exchanges
+      summary: >-
+        Exchange Volume Chart by ID
+      operationId: exchanges_id_volume_chart
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            exchange id
+            <br> *refers to [`/exchanges/list`](/reference/exchanges_list).
+            <br> Example: `binance`
+          required: true
+          schema:
+            type: string
+        - name: days
+          in: query
+          description: >-
+            data up to number of days ago
+          required: true
+          schema:
+            type: string
+            enum: [1, 7, 14, 30, 90, 180, 365, max]
+      responses:
+        '200':
+          description: Get exchange volume chart data
+  /derivatives:
+    get:
+      tags:
+        - derivatives
+      summary: >-
+        Derivatives Tickers List
+      operationId: derivatives
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: List all derivative tickers
+  /derivatives/exchanges:
+    get:
+      tags:
+        - derivatives
+      summary: >-
+        Derivatives Exchange Data List
+      operationId: derivatives_exchanges
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: order
+          in: query
+          description: >-
+            use this to sort the order of responses, default: open_interest_btc_desc
+          required: false
+          schema:
+            type: string
+            enum: [name_asc，name_desc，open_interest_btc_asc，open_interest_btc_desc，trade_volume_24h_btc_asc，trade_volume_24h_btc_desc]
+        - name: per_page
+          in: query
+          description: >-
+            total results per page
+          required: false
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: >-
+            page through results, default: 1
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List all derivative exchanges
+  /derivatives/exchanges/{id}:
+    get:
+      tags:
+        - derivatives
+      summary: >-
+        Derivatives Exchange Data by ID
+      operationId: derivatives_exchanges_id
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            derivative exchange id
+            <br> *refers to [`/derivatives/exchanges/list`](/references/derivatives_exchanges_list).
+            <br> Example: `binance_futures`
+          required: true
+          schema:
+            type: string
+        - name: include_tickers
+          in: query
+          description: >-
+            include tickers data, default: false
+          required: false
+          schema:
+            type: string
+            enum: [all, unexpired]
+      responses:
+        '200':
+          description: Get derivative exchange data
+  /derivatives/exchanges/list:
+    get:
+      tags:
+        - derivatives
+      summary: >-
+        Derivatives Exchanges List
+      operationId: derivatives_exchanges_list
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: List all derivative exchanges name and identifier
+  /nfts/list:
+    get:
+      tags:
+        - nfts (beta)
+      summary: >-
+        NFTs List
+      operationId: nfts_list
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: order
+          in: query
+          description: >-
+            use this to sort the otder of responses
+          required: false
+          schema:
+            type: string
+            enum: [h24_volume_native_asc, h24_volume_native_desc, floor_price_native_asc, floor_price_native_desc, market_cap_native_asc, market_cap_native_desc, market_cap_usd_asc, market_cap_usd_desc]
+        - name: per_page
+          in: query
+          description: >-
+            total results per page
+            <br> Valid values: 1...250
+          required: false
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: >-
+            page through results
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List all NFTs categories
+  /nfts/{id}:
+    get:
+      tags:
+        - nfts (beta)
+      summary: >-
+        NFTs Collection Data by ID
+      operationId: nfts_id
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: >-
+            NFTs id
+            <br> *refers to [`/nfts/list`](/reference/nfts_list).
+            <br> Example: `pudgy-penguins`
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get NFTs data
+  /nfts/{asset_platform_id}/contract/{contract_address}:
+    get:
+      tags:
+        - nfts (beta)
+      summary: >-
+        NFTs Collection Data by Contract Address
+      operationId: nfts_contract_address
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: asset_platform_id
+          in: path
+          description: >-
+            asset platform id
+            <br> *refers to [`/asset_platforms`](/reference/asset_platforms_list)
+            <br> Example: `ethereum`
+          required: true
+          schema:
+            type: string
+        - name: contract_address
+          in: path
+          description: >-
+            the contract address of token
+            <br> Example: `0xbd3...`
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get NFTs data
+  /exchange_rates:
+    get:
+      tags:
+        - exchange_rates
+      summary: >-
+        BTC-to-Currency Exchange Rates
+      operationId: exchange_rates
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: List rates
+  /search:
+    get:
+      tags:
+        - search
+      summary: >-
+        Search Data
+      operationId: search
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: query
+          in: query
+          description: >-
+            search query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of coins, categories and markets matching search term ordered by market cap
+  /search/trending:
+    get:
+      tags:
+        - trending
+      summary: >-
+        Trending Search Coins List
+      operationId: trending
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: List trending coins by most popular first
+  /global:
+    get:
+      tags:
+        - global
+      summary: >-
+        Crypto Global Data
+      operationId: global
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: Get cryptocurrency global data
+  /global/decentralized_finance_defi:
+    get:
+      tags:
+        - global
+      summary: >-
+        De-Fi Data
+      operationId: global_decentralized_finance_defi
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: Get cryptocurrency global decentralized finance (defi) data
+  /companies/public_treasury/{coin_id}:
+    get:
+      tags:
+        - companies (beta)
+      summary: >-
+        Public Companies Holdings
+      operationId: companies_public_treasury_coin_id
+      security:
+        - apiKeyAuth: []
+      parameters:
+        - name: coin_id
+          in: path
+          description: >-
+            coin id
+          required: true
+          schema:
+            type: string
+            enum: [bitcoin,ethereum]
+      responses:
+        '200':
+          description: Get public companies treasury data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
