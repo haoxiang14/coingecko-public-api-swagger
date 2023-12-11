@@ -21,7 +21,7 @@ paths:
     get:
       tags:
         - ping
-      summary: Check API server status
+      summary: Check API server status <br> Test 
       operationId: ping
       security:
         - apiKeyAuth: []
