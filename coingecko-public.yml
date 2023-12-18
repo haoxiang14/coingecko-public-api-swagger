@@ -20,7 +20,7 @@ paths:
   /ping:
     get:
       tags:
-        - Ping 
+        - Ping
       summary: Check API server status
       operationId: ping
       security:
