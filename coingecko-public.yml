@@ -19,7 +19,9 @@ security:
 paths:
   /ping:
     get:
-      summary: Ping
+      tags:
+        - Ping 
+      summary: Check API server status
       operationId: ping
       security:
         - apiKeyAuth: []
