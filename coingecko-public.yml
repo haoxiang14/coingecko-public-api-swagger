@@ -20,7 +20,7 @@ paths:
   /ping:
     get:
       tags:
-        - ping
+        - Ping Endpoints
       summary: Check API server status
       operationId: ping
       security:
@@ -31,7 +31,7 @@ paths:
   /simple/price:
     get:
       tags:
-        - simple
+        - Simple Endpoints
       summary: Coin Price by ID
       operationId: simple_price
       security:
@@ -96,7 +96,7 @@ paths:
   /simple/token_price/{id}:
     get:
       tags:
-        - simple
+        - Simple Endpoints
       summary: Coin Price by Contract Address
       operationId: simple_token_price
       security:
@@ -171,7 +171,7 @@ paths:
   /simple/supported_vs_currencies:
     get:
       tags:
-        - simple
+        - Simple Endpoints
       summary: Supported Currencies List
       operationId: simple_supported_vs_currencies
       security:
@@ -182,7 +182,7 @@ paths:
   /coins/list:
     get:
       tags:
-        - coins
+        - Coins Endpoints
       summary: Coins List
       operationId: coins_list
       security:
@@ -202,7 +202,7 @@ paths:
   /coins/markets:
     get:
       tags:
-        - coins
+        - Coins Endpoints
       summary: Coins List with Market Data
       operationId: coins_markets
       security:
@@ -296,7 +296,7 @@ paths:
   /coins/{id}:
     get:
       tags:
-        - coins
+        - Coins Endpoints
       summary: >-
         Coin Data by ID
       operationId: coins_id
@@ -360,7 +360,7 @@ paths:
   /coins/{id}/tickers:
     get:
       tags:
-        - coins
+        - Coins Endpoints
       summary: >-
         Coin Tickers by ID
       operationId: coins_id_tickers
@@ -420,7 +420,7 @@ paths:
   /coins/{id}/history:
     get:
       tags:
-        - coins
+        - Coins Endpoints
       summary: >-
         Coin Historical Data by ID
       operationId: coins_id_history
@@ -458,7 +458,7 @@ paths:
   /coins/{id}/market_chart:
     get: 
       tags:
-        - coins
+        - Coins Endpoints
       summary: >-
         Coin Historical Chart Data by ID
       operationId: coins_market_chart
@@ -513,7 +513,7 @@ paths:
   /coins/{id}/market_chart/range:
     get:
       tags:
-        - coins
+        - Coins Endpoints
       summary: >-
         Coin Historical Chart within Time Range by ID
       operationId: coins_id_market_chart
@@ -568,7 +568,7 @@ paths:
   /coins/{id}/ohlc:
     get:
       tags:
-        - coins
+        - Coins Endpoints
       summary: >-
         Coin OHLC Chart by ID
       operationId: coins_id_ohlc
@@ -615,7 +615,7 @@ paths:
   /coins/{id}/contract/{contract_address}:
     get:
       tags:
-        - contract
+        - Contract Endpoints
       summary: Coin Data by Contract Address
       operationId: coins_contract_address
       security:
@@ -644,7 +644,7 @@ paths:
   /coins/{id}/contract/{contract_address}/market_chart/:
     get:
       tags:
-        - contract
+        - Contract Endpoints
       summary: Coin Historical Chart Data by Contract Address
       operationId: contract_address_market_chart
       parameters:
@@ -696,7 +696,7 @@ paths:
   /coins/{id}/contract/{contract_address}/market_chart/range:
     get:
       tags:
-        - contract
+        - Contract Endpoints
       summary: Coin Historical Chart Data within Time Range by Contract Address
       parameters:
         - name: id
@@ -755,7 +755,7 @@ paths:
   /asset_platforms:
     get:
       tags:
-        - asset_platforms
+        - Asset Platforms Endpoints
       summary: >-
         Asset Platforms List
       operationId: asset_platforms_list
@@ -776,7 +776,7 @@ paths:
   /coins/categories/list:
     get:
       tags:
-        - categories
+        - Categories Endpoints
       summary: >-
         Coins Categories List
       operationId: coins_categories_list
@@ -788,7 +788,7 @@ paths:
   /coins/categories:
     get:
       tags:
-        - categories
+        - Categories Endpoints
       summary: >-
         Coins Categories List with Market Data
       operationId: coins_categories
@@ -809,7 +809,7 @@ paths:
   /exchanges:
     get:
       tags:
-        - exchanges
+        - Exchanges Endpoints
       summary: >-
         Exchanges List with data
       operationId: exchanges
@@ -837,7 +837,7 @@ paths:
   /exchanges/list:
     get:
       tags:
-        - exchanges
+        - Exchanges Endpoints
       summary: >-
         Exchanges List
       operationId: exchanges_list
@@ -849,7 +849,7 @@ paths:
   /exchanges/{id}:
     get:
       tags:
-        - exchanges
+        - Exchanges Endpoints
       summary: >-
         Exchange Data by ID
       operationId: exchanges_id
@@ -871,7 +871,7 @@ paths:
   /exchanges/{id}/tickers:
     get:
       tags:
-        - exchanges
+        - Exchanges Endpoints
       summary: >-
         Exchange Tickers by ID
       operationId: exchanges_id_tickers
@@ -931,7 +931,7 @@ paths:
   /exchanges/{id}/volume_chart:
     get:
       tags:
-        - exchanges
+        - Exchanges Endpoints
       summary: >-
         Exchange Volume Chart by ID
       operationId: exchanges_id_volume_chart
@@ -961,7 +961,7 @@ paths:
   /derivatives:
     get:
       tags:
-        - derivatives
+        - Derivatives Endpoints
       summary: >-
         Derivatives Tickers List
       operationId: derivatives
@@ -973,7 +973,7 @@ paths:
   /derivatives/exchanges:
     get:
       tags:
-        - derivatives
+        - Derivatives Endpoints
       summary: >-
         Derivatives Exchanges List with Data
       operationId: derivatives_exchanges
@@ -1008,7 +1008,7 @@ paths:
   /derivatives/exchanges/{id}:
     get:
       tags:
-        - derivatives
+        - Derivatives Endpoints
       summary: >-
         Derivatives Exchange Data by ID
       operationId: derivatives_exchanges_id
@@ -1038,7 +1038,7 @@ paths:
   /derivatives/exchanges/list:
     get:
       tags:
-        - derivatives
+        - Derivatives Endpoints
       summary: >-
         Derivatives Exchanges List
       operationId: derivatives_exchanges_list
@@ -1050,7 +1050,7 @@ paths:
   /nfts/list:
     get:
       tags:
-        - nfts (beta)
+        - NFTs Endpoints(Beta)
       summary: >-
         NFTs List
       operationId: nfts_list
@@ -1086,7 +1086,7 @@ paths:
   /nfts/{id}:
     get:
       tags:
-        - nfts (beta)
+        - NFTs Endpoints(Beta)
       summary: >-
         NFTs Collection Data by ID
       operationId: nfts_id
@@ -1108,7 +1108,7 @@ paths:
   /nfts/{asset_platform_id}/contract/{contract_address}:
     get:
       tags:
-        - nfts (beta)
+        - NFTs Endpoints(Beta)
       summary: >-
         NFTs Collection Data by Contract Address
       operationId: nfts_contract_address
@@ -1138,7 +1138,7 @@ paths:
   /exchange_rates:
     get:
       tags:
-        - exchange_rates
+        - Exchange Rates Endpoints
       summary: >-
         BTC-to-Currency Exchange Rates
       operationId: exchange_rates
@@ -1150,7 +1150,7 @@ paths:
   /search:
     get:
       tags:
-        - search
+        - Search Endpoints
       summary: >-
         Search Data
       operationId: search
@@ -1170,7 +1170,7 @@ paths:
   /search/trending:
     get:
       tags:
-        - trending
+        - Trending Endpoints
       summary: >-
         Trending Search Coins List
       operationId: trending
@@ -1182,7 +1182,7 @@ paths:
   /global:
     get:
       tags:
-        - global
+        - Global Endpoints
       summary: >-
         Crypto Global Data
       operationId: global
@@ -1194,7 +1194,7 @@ paths:
   /global/decentralized_finance_defi:
     get:
       tags:
-        - global
+        - Global Endpoints
       summary: >-
         De-Fi Data
       operationId: global_decentralized_finance_defi
@@ -1206,7 +1206,7 @@ paths:
   /companies/public_treasury/{coin_id}:
     get:
       tags:
-        - companies (beta)
+        - Companies Endpoints (Beta)
       summary: >-
         Public Companies Holdings
       operationId: companies_public_treasury_coin_id
