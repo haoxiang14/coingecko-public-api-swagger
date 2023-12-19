@@ -22,6 +22,8 @@ paths:
       tags:
         - Ping
       summary: Check API server status
+      description: >-
+        This endpoint allows you to check the API server status
       operationId: ping
       security:
         - apiKeyAuth: []
