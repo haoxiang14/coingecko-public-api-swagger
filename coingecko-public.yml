@@ -34,7 +34,7 @@ paths:
       tags:
         - Simple Endpoints
       summary: Coin Price by IDs
-      description: This endpoint allows you to **query a token price by using unique coin api id**. 
+      description: This endpoint allows you to **query the prices of one or more coins by using their unique Coin API IDs**.
       operationId: simple_price
       security:
         - apiKeyAuth: []
@@ -883,7 +883,7 @@ paths:
       tags:
         - Exchanges Endpoints
       summary: Exchange Tickers by ID
-      description: This endpoint allows you to **query exchange’s data (name, year established, country, .... etc), exchange volume in BTC and tickers based on exchange’s id**.
+      description: This endpoint allows you to **query exchange's tickers based on exchange’s id**.
       operationId: exchanges_id_tickers
       security:
         - apiKeyAuth: []
@@ -1037,7 +1037,7 @@ paths:
         - name: include_tickers
           in: query
           description: >-
-            include tickers data, default: false
+            include tickers data
           required: false
           schema:
             type: string
@@ -1181,8 +1181,8 @@ paths:
     get:
       tags:
         - Trending Endpoints
-      summary: Trending Search Coins List
-      description: This endpoint allows you **query trending search coins on CoinGecko in the last 24 hours**.
+      summary: Trending Search List
+      description: This endpoint allows you **query trending search coins, nfts and categories on CoinGecko in the last 24 hours**.
       operationId: trending
       security:
         - apiKeyAuth: []
