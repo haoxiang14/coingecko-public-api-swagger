@@ -32,7 +32,7 @@ paths:
   /simple/price:
     get:
       tags:
-        - Simple Endpoints
+        - Simple
       summary: Coin Price by IDs
       description: This endpoint allows you to **query the prices of one or more coins by using their unique Coin API IDs**.
       operationId: simple_price
@@ -98,7 +98,7 @@ paths:
   /simple/token_price/{id}:
     get:
       tags:
-        - Simple Endpoints
+        - Simple
       summary: Coin Price by Contract Addresses
       description: This endpoint allows you to **query a token price by using contract address**. 
       operationId: simple_token_price
@@ -174,7 +174,7 @@ paths:
   /simple/supported_vs_currencies:
     get:
       tags:
-        - Simple Endpoints
+        - Simple
       summary: Supported Currencies List
       description: This endpoint allows you to **query all the supported currencies on CoinGecko**. 
       operationId: simple_supported_vs_currencies
@@ -186,7 +186,7 @@ paths:
   /coins/list:
     get:
       tags:
-        - Coins Endpoints
+        - Coins
       summary: Coins List
       description: This endpoint allows you to **query all the supported coins on CoinGecko with coins id, name and symbol**.
       operationId: coins_list
@@ -207,7 +207,7 @@ paths:
   /coins/markets:
     get:
       tags:
-        - Coins Endpoints
+        - Coins
       summary: Coins List with Market Data
       description: This endpoint allows you to **query all the supported coins with price, market cap, volume and market related data**.
       operationId: coins_markets
@@ -302,7 +302,7 @@ paths:
   /coins/{id}:
     get:
       tags:
-        - Coins Endpoints
+        - Coins
       summary: Coin Data by ID
       description: This endpoint allows you to **query all the coin data of a coin (name, price, market .... including exchange tickers) on CoinGecko coin page based on a particular coin id**.
       operationId: coins_id
@@ -366,7 +366,7 @@ paths:
   /coins/{id}/tickers:
     get:
       tags:
-        - Coins Endpoints
+        - Coins
       summary: Coin Tickers by ID
       description: This endpoint allows you to **query the coin tickers on both centralized exchange (cex) and decentralized exchange (dex) based on a particular coin id**.
       operationId: coins_id_tickers
@@ -426,7 +426,7 @@ paths:
   /coins/{id}/history:
     get:
       tags:
-        - Coins Endpoints
+        - Coins
       summary: Coin Historical Data by ID
       description: This endpoint allows you to **query the historical data (price, market cap, 24hrs volume, etc) at a given date for a coin based on a particular coin id**.
       operationId: coins_id_history
@@ -464,7 +464,7 @@ paths:
   /coins/{id}/market_chart:
     get: 
       tags:
-        - Coins Endpoints
+        - Coins
       summary: Coin Historical Chart Data by ID
       description: This endpoint allows you to **get the historical chart data of a coin including time in UNIX, price, market cap and 24hrs volume based on particular coin id**.
       operationId: coins_market_chart
@@ -519,7 +519,7 @@ paths:
   /coins/{id}/market_chart/range:
     get:
       tags:
-        - Coins Endpoints
+        - Coins
       summary: Coin Historical Chart within Time Range by ID
       description: This endpoint allows you to **get the historical chart data of a coin within certain time range in UNIX along with price, market cap and 24hrs volume based on particular coin id**.
       operationId: coins_id_market_chart
@@ -574,7 +574,7 @@ paths:
   /coins/{id}/ohlc:
     get:
       tags:
-        - Coins Endpoints
+        - Coins
       summary: Coin OHLC Chart by ID
       description: This endpoint allows you to **get the OHLC chart (Open, High, Low, Close) of a coin based on particular coin id**. 
       operationId: coins_id_ohlc
@@ -595,7 +595,7 @@ paths:
           description: >-
             target currency of price data
             <br> *refers to [`/simple/supported_vs_currencies`](/reference/simple_supported_vs_currencies).
-            <br> Example: `usd ` or ` usd,eur,...`
+            <br> Example: `usd ` or `eur`
           required: true
           schema:
             type: string
@@ -621,7 +621,7 @@ paths:
   /coins/{id}/contract/{contract_address}:
     get:
       tags:
-        - Contract Endpoints
+        - Contract
       summary: Coin Data by Contract Address
       description: This endpoint allows you to **query all the coin data (name, price, market .... including exchange tickers) on CoinGecko coin page based on asset platform and particular token contract address**.
       operationId: coins_contract_address
@@ -651,7 +651,7 @@ paths:
   /coins/{id}/contract/{contract_address}/market_chart:
     get:
       tags:
-        - Contract Endpoints
+        - Contract
       summary: Coin Historical Chart Data by Contract Address
       description: This endpoint allows you to **get the historical chart data including time in UNIX, price, market cap and 24hrs volume based on asset platform and particular token contract address**.
       operationId: contract_address_market_chart
@@ -704,7 +704,7 @@ paths:
   /coins/{id}/contract/{contract_address}/market_chart/range:
     get:
       tags:
-        - Contract Endpoints
+        - Contract
       summary: Coin Historical Chart Data within Time Range by Contract Address
       description: This endpoint allows you to **get the historical chart data within certain time range in UNIX along with price, market cap and 24hrs volume  based on asset platform and particular token contract address**.
 
@@ -765,7 +765,7 @@ paths:
   /asset_platforms:
     get:
       tags:
-        - Asset Platforms Endpoints
+        - Asset Platforms
       summary: Asset Platforms List
       description: This endpoint allows you to **query all the asset platforms on CoinGecko**.
       operationId: asset_platforms_list
@@ -786,7 +786,7 @@ paths:
   /coins/categories/list:
     get:
       tags:
-        - Categories Endpoints
+        - Categories
       summary: Coins Categories List
       description: This endpoint allows you to **query all the coins categories on CoinGecko**. 
       operationId: coins_categories_list
@@ -798,7 +798,7 @@ paths:
   /coins/categories:
     get:
       tags:
-        - Categories Endpoints
+        - Categories
       summary: Coins Categories List with Market Data
       description: This endpoint allows you to **query all the coins categories with market data (market cap, volume, etc.) on CoinGecko**.
       operationId: coins_categories
@@ -819,7 +819,7 @@ paths:
   /exchanges:
     get:
       tags:
-        - Exchanges Endpoints
+        - Exchanges
       summary: Exchanges List with data
       description: This endpoint allows you to **query all the supported exchanges with exchanges’ data (id, name, country, .... etc) that have active trading volumes on CoinGecko**.
       operationId: exchanges
@@ -847,7 +847,7 @@ paths:
   /exchanges/list:
     get:
       tags:
-        - Exchanges Endpoints
+        - Exchanges
       summary: Exchanges List
       description: This endpoint allows you to **query all the exchanges with id and name**.
       operationId: exchanges_list
@@ -859,7 +859,7 @@ paths:
   /exchanges/{id}:
     get:
       tags:
-        - Exchanges Endpoints
+        - Exchanges
       summary: Exchange Data by ID
       description: This endpoint allows you to **query exchange’s data (name, year established, country, .... etc), exchange volume in BTC and tickers based on exchange’s id**.
       operationId: exchanges_id
@@ -881,7 +881,7 @@ paths:
   /exchanges/{id}/tickers:
     get:
       tags:
-        - Exchanges Endpoints
+        - Exchanges
       summary: Exchange Tickers by ID
       description: This endpoint allows you to **query exchange's tickers based on exchange’s id**.
       operationId: exchanges_id_tickers
@@ -941,7 +941,7 @@ paths:
   /exchanges/{id}/volume_chart:
     get:
       tags:
-        - Exchanges Endpoints
+        - Exchanges
       summary: Exchange Volume Chart by ID
       description: This endpoint allows you to **query the historical volume chart data with time in UNIX and trading volume data in BTC based on exchange’s id**.
       operationId: exchanges_id_volume_chart
@@ -971,7 +971,7 @@ paths:
   /derivatives:
     get:
       tags:
-        - Derivatives Endpoints
+        - Derivatives
       summary: Derivatives Tickers List
       description: This endpoint allows you to **query all the tickers from derivatives exchanges on CoinGecko**.
       operationId: derivatives
@@ -983,7 +983,7 @@ paths:
   /derivatives/exchanges:
     get:
       tags:
-        - Derivatives Endpoints
+        - Derivatives
       summary: Derivatives Exchanges List with Data
       description: This endpoint allows you to **query all the derivatives exchanges with related data (id, name, open interest, .... etc) on CoinGecko**. 
       operationId: derivatives_exchanges
@@ -1018,7 +1018,7 @@ paths:
   /derivatives/exchanges/{id}:
     get:
       tags:
-        - Derivatives Endpoints
+        - Derivatives
       summary: Derivatives Exchange Data by ID
       description: This endpoint allows you to **query the derivatives exchange’s related data (id, name, open interest, .... etc) based on the exchanges’ id**.
       operationId: derivatives_exchanges_id
@@ -1048,7 +1048,7 @@ paths:
   /derivatives/exchanges/list:
     get:
       tags:
-        - Derivatives Endpoints
+        - Derivatives
       summary: Derivatives Exchanges List
       description: This endpoint allows you to **query all the derivatives exchanges with id and name on CoinGecko**.
       operationId: derivatives_exchanges_list
@@ -1060,7 +1060,7 @@ paths:
   /nfts/list:
     get:
       tags:
-        - NFTs Endpoints (Beta)
+        - NFTs (Beta)
       summary: NFTs List
       description: This endpoint allows you to **query all supported NFTs with id, contract address, name, asset platform id and symbol on CoinGecko**.
       operationId: nfts_list
@@ -1096,7 +1096,7 @@ paths:
   /nfts/{id}:
     get:
       tags:
-        - NFTs Endpoints (Beta)
+        - NFTs (Beta)
       summary: NFTs Collection Data by ID
       description: This endpoint allows you to **query all the NFT data (name, floor price, 24 hr volume....) based on the nft collection id**.
       operationId: nfts_id
@@ -1118,7 +1118,7 @@ paths:
   /nfts/{asset_platform_id}/contract/{contract_address}:
     get:
       tags:
-        - NFTs Endpoints (Beta)
+        - NFTs (Beta)
       summary: NFTs Collection Data by Contract Address
       description: This endpoint allows you to **query all the NFT data (name, floor price, 24 hr volume....) based on the nft collection contract address and respective asset platform**.
       operationId: nfts_contract_address
@@ -1148,7 +1148,7 @@ paths:
   /exchange_rates:
     get:
       tags:
-        - Exchange Rates Endpoints
+        - Exchange Rates
       summary: BTC-to-Currency Exchange Rates
       description:  This endpoint allows you to **query BTC exchange rates with other currencies**.
       operationId: exchange_rates
@@ -1160,7 +1160,7 @@ paths:
   /search:
     get:
       tags:
-        - Search Endpoints
+        - Search
       summary: Search Data
       description: This endpoint allows you to **search for coins, categories and markets listed on CoinGecko**. 
       operationId: search
@@ -1180,7 +1180,7 @@ paths:
   /search/trending:
     get:
       tags:
-        - Trending Endpoints
+        - Trending
       summary: Trending Search List
       description: This endpoint allows you **query trending search coins, nfts and categories on CoinGecko in the last 24 hours**.
       operationId: trending
@@ -1192,7 +1192,7 @@ paths:
   /global:
     get:
       tags:
-        - Global Endpoints
+        - Global
       summary: Crypto Global Data
       description: This endpoint allows you **query cryptocurrency global data including active cryptocurrencies, markets, total crypto market cap and etc**. 
       operationId: global
@@ -1204,7 +1204,7 @@ paths:
   /global/decentralized_finance_defi:
     get:
       tags:
-        - Global Endpoints
+        - Global
       summary: De-Fi Data
       description: This endpoint allows you **query cryptocurrency global decentralized finance (defi) data including defi market cap, trading volume**.
       operationId: global_decentralized_finance_defi
@@ -1216,7 +1216,7 @@ paths:
   /companies/public_treasury/{coin_id}:
     get:
       tags:
-        - Companies Endpoints (Beta)
+        - Companies (Beta)
       summary: Public Companies Holdings
       description: This endpoint allows you **query public companies’ bitcoin or ethereum holdings**.
       operationId: companies_public_treasury_coin_id
